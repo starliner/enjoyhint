@@ -610,12 +610,12 @@ var EnjoyHint = function (_options) {
                 that.$element_dis_events.click(stopPropagation);
 
 
-                that.$skip_btn = $('<div>', {'class': that.cl.skip_btn}).appendTo(that.enjoyhint).html('Skip').click(function (e) {
+                that.$skip_btn = $('<button>', {'class': that.cl.skip_btn}).appendTo(that.enjoyhint).html('Skip').click(function (e) {
 
                     that.hide();
                     that.options.onSkipClick();
                 });
-                that.$next_btn = $('<div>', {'class': that.cl.next_btn}).appendTo(that.enjoyhint).html('Next').click(function (e) {
+                that.$next_btn = $('<button>', {'class': that.cl.next_btn}).appendTo(that.enjoyhint).html('Next').click(function (e) {
 
                     that.options.onNextClick();
                 });
@@ -1202,11 +1202,11 @@ var EnjoyHint = function (_options) {
                     });
 
                     that.$next_btn.css({
-                        left: label_x,
+                        left: label_x + label_width - that.$next_btn.width() - 35,
                         top: label_y + label_height + 20
                     });
 
-                    var left_skip = label_x + that.$next_btn.width() + 10;
+                    var left_skip = label_x + that.$next_btn.width() + 50;
 
                     if (that.nextBtn == "hide"){
 
