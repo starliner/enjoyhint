@@ -134,7 +134,9 @@ var EnjoyHint = function (_options) {
                 that.clear();
             }, 250);
 
-            $body.scrollTo(step_data.selector, step_data.scrollAnimationSpeed || 250, {offset: -100});
+            if (step_data.noScroll) {
+                $body.scrollTo(step_data.selector, step_data.scrollAnimationSpeed || 250, {offset: -100});
+            }
 
             setTimeout(function () {
 
@@ -276,7 +278,8 @@ var EnjoyHint = function (_options) {
                         left: step_data.left,
                         right: step_data.right,
                         margin: step_data.margin,
-                        scroll: step_data.scroll
+                        scroll: step_data.scroll,
+                        noScroll: step_data.noScroll
                     };
 
                     if (step_data.shape && step_data.shape == 'circle') {
