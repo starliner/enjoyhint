@@ -78,9 +78,9 @@ var EnjoyHint = function (_options) {
         var $skipBtn = $('.enjoyhint_skip_btn');
 
         $nextBtn.removeClass(that.nextUserClass);
-        $nextBtn.text("Next");
+        $nextBtn.text("");
         $skipBtn.removeClass(that.skipUserClass);
-        $skipBtn.text("Skip");
+        $skipBtn.text("");
     };
 
     var stepAction = function () {
@@ -101,7 +101,6 @@ var EnjoyHint = function (_options) {
         var step_data = data[current_step];
 
         if (step_data.onBeforeStart && typeof step_data.onBeforeStart === 'function') {
-
             step_data.onBeforeStart();
         }
 
@@ -342,8 +341,7 @@ var EnjoyHint = function (_options) {
     /********************* PUBLIC METHODS ***************************************/
 
     $(window).on('resize.enjoy_hint_permanent', function() {
-
-        if ($event_element[0]) {
+        if (typeof $event_element !== 'undefined' && $event_element[0]) {
             $body.enjoyhint('redo_events_near_rect', $event_element[0].getBoundingClientRect());
         }
     });
@@ -672,7 +670,7 @@ var EnjoyHint = function (_options) {
                 that.kinetic_stage.add(that.layer);
 
                 $(window).on('resize.enjoy_hint', function() {
-                    if (!($(that.stepData.enjoyHintElementSelector).is(":visible"))) {
+                    if (typeof that.stepData !== 'undefined' && !($(that.stepData.enjoyHintElementSelector).is(":visible"))) {
 
                         that.stopFunction();
                         $(window).off('resize.enjoy_hint');
@@ -696,7 +694,9 @@ var EnjoyHint = function (_options) {
                     that.layer.draw();
                     that.kinetic_stage.draw();
 
-                    that.renderLabelWithShape(that.updateShapeData());
+                    if (typeof that.updateShapeData == 'function') {
+                        that.renderLabelWithShape(that.updateShapeData());
+                    }
                 });
 
                 var enjoyhint_elements = [
